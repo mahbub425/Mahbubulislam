@@ -78,29 +78,34 @@ A comprehensive money management mobile application built with React Native, Exp
 2. **Configure Supabase**
    - Create a new Supabase project at [supabase.com](https://supabase.com)
    - Copy your project URL and anon key
-   - Update `src/config/supabase.ts` with your credentials:
-   ```typescript
-   const supabaseUrl = 'YOUR_SUPABASE_URL';
-   const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+   - Create a `.env` file in the root directory (copy from `.env.example`):
+   ```
+   EXPO_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
 3. **Set Up Database**
    - Run the migration file in your Supabase SQL editor:
    ```sql
-   -- Copy and paste the contents of supabase/migrations/create_initial_schema.sql
+   -- Copy and paste the contents of supabase/migrations/20250807110415_calm_wood.sql
    ```
 
 4. **Configure Authentication**
    - In Supabase Dashboard, go to Authentication > Settings
    - Configure email templates and providers as needed
    - Enable email confirmations if desired
+   
+5. **Set Up Storage Buckets**
+   - In Supabase Dashboard, go to Storage
+   - Create two buckets: `receipts` and `profiles`
+   - Set both buckets to public for easy access
 
-5. **Start Development Server**
+6. **Start Development Server**
    ```bash
    npm start
    ```
 
-6. **Run on Device**
+7. **Run on Device**
    - Install Expo Go app on your mobile device
    - Scan the QR code from the terminal
    - Or use iOS Simulator / Android Emulator
@@ -123,6 +128,53 @@ supabase/
 └── migrations/       # Database migration files
 ```
 
+## 🚀 **Current Features Implemented**
+
+### ✅ **User Portal & Authentication**
+- Secure email/password signup and login
+- Password strength validation
+- Biometric authentication support
+- Password recovery functionality
+- Profile management with picture upload
+- Account deletion with data cleanup
+
+### ✅ **Transaction Management**
+- Add income and expense transactions
+- Receipt image upload and storage
+- Category selection (predefined + custom)
+- Account tracking (Bank, Cash, Credit Card, etc.)
+- Recurring transaction support
+- Edit and delete transactions
+- Transaction history with search/filter
+
+### ✅ **Budget Management**
+- Create budgets by category and period
+- Real-time progress tracking with visual indicators
+- Budget alerts when approaching/exceeding limits
+- Edit and delete budget functionality
+- Spending analysis and remaining budget display
+
+### ✅ **Financial Goals**
+- Set savings goals with target amounts and deadlines
+- Progress tracking with visual progress bars
+- Goal completion and milestone notifications
+- Archive completed goals
+- Edit and delete goal functionality
+
+### ✅ **Dashboard & Analytics**
+- Real-time balance calculation
+- Monthly income and expense summaries
+- Recent transactions overview
+- Quick action buttons for common tasks
+- Responsive design for all screen sizes
+
+### ✅ **Security & Data Management**
+- Row-Level Security (RLS) implementation
+- Secure file storage for receipts and profiles
+- Real-time data synchronization
+- Automatic user profile creation
+- Default categories setup
+
 ## Key Features Implementation
 
 ### User Portal System
@@ -135,29 +187,36 @@ The app enforces a mandatory user portal where users must create an account befo
 ### Real-time Data Synchronization
 All financial data is synchronized in real-time across devices using Supabase's real-time capabilities, ensuring users always have access to their latest financial information.
 
-### Offline Support
-The app includes offline functionality, allowing users to:
-- View previously loaded data when offline
-- Add transactions offline (synced when online)
-- Access core features without internet connection
-
 ### Security Features
 - **Row-Level Security**: Database policies ensure users can only access their own data
 - **Encrypted Storage**: All sensitive data is encrypted at rest
 - **Secure Authentication**: Multi-factor authentication with biometric support
 - **API Security**: All API communications use HTTPS with proper authentication
 
+## 🔄 **Upcoming Features**
+
+- [ ] **Reports & Analytics**: Monthly/yearly reports with charts
+- [ ] **Export Functionality**: PDF/CSV export capabilities  
+- [ ] **Advanced Notifications**: Push notifications for budgets and goals
+- [ ] **Bank Integration**: Plaid API for automatic transaction import
+- [ ] **Recurring Transactions**: Automated recurring transaction processing
+- [ ] **Category Management**: Custom category creation and management
+- [ ] **Multi-currency Support**: Support for multiple currencies
+- [ ] **Offline Mode**: Offline functionality with sync when online
+- [ ] **Data Backup/Restore**: Comprehensive backup and restore features
+- [ ] **Advanced Security**: Enhanced MFA and security features
+
 ## Deployment
 
 ### Mobile App Deployment
 ```bash
 # Build for iOS
-expo build:ios
+eas build --platform ios
 
 # Build for Android
-expo build:android
+eas build --platform android
 
-# Or use EAS Build (recommended)
+# Build for both platforms
 eas build --platform all
 ```
 
@@ -171,11 +230,31 @@ expo build:web
 
 ## Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory (copy from `.env.example`):
 ```
 EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+## 🛠️ **Development Notes**
+
+### Database Schema
+The app uses a comprehensive PostgreSQL schema with:
+- **user_profiles**: User information and preferences
+- **transactions**: Financial transactions with categories
+- **budgets**: Budget tracking with periods and limits
+- **goals**: Financial goals with progress tracking
+- **categories**: Custom and predefined transaction categories
+
+### File Storage
+- **receipts**: Transaction receipt images
+- **profiles**: User profile pictures
+
+### Security Implementation
+- Row-Level Security (RLS) on all tables
+- User-specific data access policies
+- Secure file upload and storage
+- Authentication state management
 
 ## Contributing
 
@@ -198,16 +277,21 @@ For support and questions:
 
 ## Roadmap
 
-- [ ] Advanced analytics and insights
+- [x] Core transaction management
+- [x] Budget tracking and alerts
+- [x] Financial goal setting
+- [x] User profile management
+- [ ] Advanced reporting with charts
+- [ ] Push notifications
 - [ ] Cryptocurrency tracking
 - [ ] Investment portfolio management
 - [ ] Bill splitting features
-- [ ] Multi-currency support
 - [ ] Bank account integration (Plaid)
 - [ ] AI-powered financial advice
 - [ ] Family account sharing
-- [ ] Advanced reporting features
 - [ ] Tax preparation assistance
+- [ ] Multi-currency support
+- [ ] Offline functionality
 
 ---
 

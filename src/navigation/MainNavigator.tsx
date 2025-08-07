@@ -3,6 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { HomeScreen } from '../screens/main/HomeScreen';
+import { AddTransactionScreen } from '../screens/main/AddTransactionScreen';
+import { TransactionsScreen } from '../screens/main/TransactionsScreen';
+import { BudgetScreen } from '../screens/main/BudgetScreen';
+import { GoalsScreen } from '../screens/main/GoalsScreen';
+import { ProfileScreen } from '../screens/main/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,6 +19,11 @@ const HomeStack = () => (
       component={HomeScreen} 
       options={{ headerShown: false }}
     />
+    <Stack.Screen 
+      name="AddTransaction" 
+      component={AddTransactionScreen} 
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 
@@ -21,8 +31,13 @@ const TransactionsStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
       name="TransactionsMain" 
-      component={() => null} // Placeholder
-      options={{ title: 'Transactions' }}
+      component={TransactionsScreen} 
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen 
+      name="AddTransaction" 
+      component={AddTransactionScreen} 
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -31,8 +46,8 @@ const BudgetStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
       name="BudgetMain" 
-      component={() => null} // Placeholder
-      options={{ title: 'Budget' }}
+      component={BudgetScreen} 
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -41,8 +56,8 @@ const GoalsStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
       name="GoalsMain" 
-      component={() => null} // Placeholder
-      options={{ title: 'Goals' }}
+      component={GoalsScreen} 
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
@@ -51,8 +66,8 @@ const ProfileStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
       name="ProfileMain" 
-      component={() => null} // Placeholder
-      options={{ title: 'Profile' }}
+      component={ProfileScreen} 
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );
